@@ -1,28 +1,28 @@
-import { useState } from 'react'
-import { menuItems } from '../data/menu'
-
-const featuredItems = [menuItems[0], menuItems[4], menuItems[6], menuItems[10]]
-const rupees = (amount) => `${String.fromCharCode(8377)}${amount}`
+import { ZOMATO_ORDER_URL } from '../data/links'
 
 function Featured() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const item = featuredItems[activeIndex]
-  const step = (direction) => setActiveIndex((index) => (index + direction + featuredItems.length) % featuredItems.length)
-
   return (
     <section className="featured-section" aria-labelledby="favourites-title">
-      <div className="featured-topline"><p className="eyebrow">A little extra love</p><span>{String(activeIndex + 1).padStart(2, '0')} <i /> {String(featuredItems.length).padStart(2, '0')}</span></div>
+      <div className="featured-topline">
+        <p className="eyebrow">From our neighbourhood</p>
+        <span><i aria-hidden="true" /> Ludhiana, Punjab</span>
+      </div>
       <div className="favourite-layout">
-        <div className="favourite-photo" key={`photo-${item.id}`}><img src={item.image} alt={item.alt} loading="lazy" /><span className="favourite-photo-label">On the table, in good company</span><span className="favourite-ornament" aria-hidden="true">C&amp;B</span></div>
-        <div className="favourite-copy" key={`copy-${item.id}`}>
-          <p className="eyebrow">House favourites</p><h2 id="favourites-title">A little<br />something<br /><em>lovely.</em></h2>
+        <figure className="favourite-photo">
+          <img src="/images/margherita.jpg" alt="Vegetarian margherita pizza with tomato, mozzarella and basil" loading="lazy" />
+          <figcaption className="favourite-photo-label">Good things, shared around the table</figcaption>
+          <span className="favourite-ornament" aria-hidden="true">C&amp;B</span>
+        </figure>
+        <div className="favourite-copy">
+          <p className="eyebrow">Vegetarian kitchen</p>
+          <h2 id="favourites-title">A table<br />for good<br /><em>company.</em></h2>
           <div className="favourite-rule" />
-          <p className="favourite-category">{item.category}</p><h3>{item.name}</h3><p className="favourite-description">{item.description}</p>
-          <div className="favourite-actions"><strong>{rupees(item.price)}</strong><a href="#menu" className="text-link">See it on the menu <span aria-hidden="true">{'\u2197'}</span></a></div>
-          <div className="favourite-controls" aria-label="Choose a house favourite">
-            <button type="button" className="favourite-arrow" aria-label="Previous favourite" onClick={() => step(-1)}>{'\u2190'}</button>
-            {featuredItems.map((featuredItem, index) => <button key={featuredItem.id} type="button" className={`favourite-dot${index === activeIndex ? ' active' : ''}`} aria-label={`Show ${featuredItem.name}`} aria-pressed={index === activeIndex} onClick={() => setActiveIndex(index)} />)}
-            <button type="button" className="favourite-arrow" aria-label="Next favourite" onClick={() => step(1)}>{'\u2192'}</button>
+          <p className="favourite-category">Made for the everyday</p>
+          <h3>Come as you are.</h3>
+          <p className="favourite-description">Find coffee, familiar bites and a little time together at Coffee And Bites in Ludhiana.</p>
+          <div className="favourite-actions">
+            <span className="menu-kicker">Sandwiches · Burgers · Pizza · Pasta · More</span>
+            <a href={ZOMATO_ORDER_URL} target="_blank" rel="noopener noreferrer" className="text-link">Explore on Zomato <span aria-hidden="true">{'\u2197'}</span></a>
           </div>
         </div>
       </div>

@@ -1,10 +1,4 @@
-const contactDetails = [
-  { label: 'Phone', value: 'PHONE_NUMBER_HERE' },
-  { label: 'Instagram', value: 'INSTAGRAM_HANDLE_HERE' },
-  { label: 'WhatsApp', value: 'WHATSAPP_NUMBER_HERE' },
-  { label: 'Location', value: 'Near Baba Balak Nath Mandir, Jassian Road, Haibowal Kalan, Ludhiana, Punjab' },
-  { label: 'Opening Hours', value: 'OPENING_HOURS_HERE' },
-]
+import { GOOGLE_MAPS_DIRECTIONS_URL, ZOMATO_ORDER_URL } from '../data/links'
 
 function Contact() {
   return (
@@ -13,24 +7,23 @@ function Contact() {
         <div className="contact-copy">
           <p className="eyebrow">The kettle is on</p>
           <h2 id="contact-title">Come on<br /><em>in.</em></h2>
-          <p>Perfect for a coffee break, a quick lunch, or a relaxed evening with good company.</p>
+          <p>For a coffee break, a comforting bite, or an unhurried catch-up.</p>
           <div className="contact-cta-row">
-            <a href="#menu" className="button button-primary">Order Now <span aria-hidden="true">{'\u2198'}</span></a>
-            <a href="https://www.google.com/maps/search/?api=1&query=Coffee+And+Bites%2C+Near+Baba+Balak+Nath+Mandir%2C+Jassian+Road%2C+Haibowal+Kalan%2C+Ludhiana%2C+Punjab" target="_blank" rel="noreferrer" className="button button-secondary">Get Directions <span aria-hidden="true">{'\u2197'}</span></a>
+            <a href={ZOMATO_ORDER_URL} target="_blank" rel="noopener noreferrer" className="button button-primary">Order on Zomato <span aria-hidden="true">{'\u2197'}</span></a>
+            <a href={GOOGLE_MAPS_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="button button-secondary">Get Directions <span aria-hidden="true">{'\u2197'}</span></a>
           </div>
         </div>
 
         <div className="contact-hours">
-          <span className="hours-label">Find us</span>
-          <strong>Good food,<br />great coffee,<br />easy evenings.</strong>
-          <div className="contact-list">
-            {contactDetails.map((detail) => (
-              <div key={detail.label} className="contact-row">
-                <span>{detail.label}</span>
-                <strong>{detail.value}</strong>
-              </div>
-            ))}
-          </div>
+          <span className="hours-label">Come by</span>
+          <strong aria-label="11:00 AM to 8:30 PM">11:00 AM <i aria-hidden="true">–</i> 8:30 PM</strong>
+          <span>Every day</span>
+          <address>
+            Near Baba Balak Nath Mandir<br />
+            Jassian Road, Haibowal Kalan<br />
+            Police Station Haibowal<br />
+            Ludhiana, Punjab
+          </address>
         </div>
         <span className="contact-bean bean-one" aria-hidden="true" />
         <span className="contact-bean bean-two" aria-hidden="true" />

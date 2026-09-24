@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Navbar from './components/Navbar'
 import Loader from './components/Loader'
 import Hero from './components/Hero'
@@ -10,13 +10,14 @@ import Gallery from './components/Gallery'
 import Location from './components/Location'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import { menuItems } from './data/menu'
+import { menuCategories } from './data/menu'
 
 function App() {
   const [activeCategory, setActiveCategory] = useState('All')
   const [showLoader, setShowLoader] = useState(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
     try {
-      return window.localStorage.getItem('coffee-bites-intro-seen') !== 'yes' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      return window.localStorage.getItem('coffee-bites-intro-seen') !== 'yes'
     } catch {
       return true
     }
@@ -27,7 +28,7 @@ function App() {
     const timer = window.setTimeout(() => {
       try { window.localStorage.setItem('coffee-bites-intro-seen', 'yes') } catch { /* Storage can be disabled; the intro still finishes. */ }
       setShowLoader(false)
-    }, 900)
+    }, 2050)
     return () => window.clearTimeout(timer)
   }, [showLoader])
 
@@ -49,15 +50,13 @@ function App() {
     return () => observer.disconnect()
   }, [])
 
-  const filteredMenu = useMemo(() => activeCategory === 'All' ? menuItems : menuItems.filter((item) => item.category === activeCategory), [activeCategory])
-
   return (
     <div className="page-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar />
       <main className="content" id="main-content">
         <Hero />
-        <Menu menuItems={filteredMenu} activeCategory={activeCategory} onChangeCategory={setActiveCategory} />
+        <Menu categories={menuCategories} activeCategory={activeCategory} onChangeCategory={setActiveCategory} />
         <Featured />
         <About />
         <Features />

@@ -1,36 +1,53 @@
-import { menuCategories } from '../data/menu'
+import { categoryVisuals } from '../data/menu'
+import { ZOMATO_ORDER_URL } from '../data/links'
 
-const rupees = (amount) => `${String.fromCharCode(8377)}${amount}`
-
-function Menu({ menuItems, activeCategory, onChangeCategory }) {
-  const spotlight = menuItems[0]
-  const listItems = menuItems.slice(1)
+function Menu({ categories, activeCategory, onChangeCategory }) {
+  const visual = categoryVisuals[activeCategory] ?? categoryVisuals.All
+  const title = activeCategory === 'All' ? 'A little of everything.' : `In the mood for ${activeCategory.toLowerCase()}?`
 
   return (
     <section className="menu-section" id="menu" aria-labelledby="menu-title">
       <div className="menu-heading">
-        <div><p className="eyebrow">A little something for everyone</p><h2 id="menu-title">Made for the<br /><em>moment you’re in.</em></h2></div>
-        <p className="menu-aside-note">A few of our everyday favourites, made to be shared — or kept all to yourself.</p>
-      </div>
-      <div className="menu-tabs" role="group" aria-label="Filter menu by category">
-        {menuCategories.map((category) => <button key={category} type="button" className={`filter-button${category === activeCategory ? ' active' : ''}`} aria-pressed={category === activeCategory} onClick={() => onChangeCategory(category)}>{category}</button>)}
-      </div>
-      {spotlight && <div className="menu-layout" key={activeCategory}>
-        <article className="menu-spotlight">
-          <div className="menu-spotlight-image"><img src={spotlight.image} alt={spotlight.alt} loading="lazy" /><span className="spotlight-ribbon">{spotlight.badge ?? 'A good place to start'}</span></div>
-          <div className="menu-spotlight-copy"><span className="menu-kicker">{spotlight.category} · {spotlight.badge ?? 'house pick'}</span><h3>{spotlight.name}</h3><p>{spotlight.description}</p><strong className="menu-price">{rupees(spotlight.price)}</strong></div>
-        </article>
-        <div className="menu-list-wrap" aria-live="polite">
-          <div className="menu-list-heading"><span>From the kitchen</span><span>Price</span></div>
-          <div className="menu-list">
-            {listItems.map((item, index) => <article className="menu-row" key={item.id} style={{ '--row-index': index }}>
-              <span className="menu-row-number">{String(index + 2).padStart(2, '0')}</span><div className="menu-row-copy"><h3>{item.name}</h3><p>{item.description}</p></div><strong className="menu-row-price">{rupees(item.price)}</strong>
-            </article>)}
-            {listItems.length === 0 && <p className="menu-empty">One lovely choice in this category. More to come.</p>}
-          </div>
-          <p className="menu-footnote">A little extra happiness, served with every good meal.</p>
+        <div>
+          <p className="eyebrow">A little something for everyone</p>
+          <h2 id="menu-title">Find your kind<br /><em>of comfort.</em></h2>
         </div>
-      </div>}
+        <p className="menu-aside-note">Take a look around, then find the current menu and ordering options on Zomato.</p>
+      </div>
+      <div className="menu-tabs" role="group" aria-label="Browse menu categories">
+        {categories.map((category) => (
+          <button
+            key={category}
+            type="button"
+            className={`filter-button${category === activeCategory ? ' active' : ''}`}
+            aria-pressed={category === activeCategory}
+            onClick={() => onChangeCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+      <div className="menu-layout" key={activeCategory}>
+        <figure className="menu-spotlight">
+          <div className="menu-spotlight-image">
+            <img src={visual.image} alt={visual.alt} loading="lazy" />
+          </div>
+          <figcaption className="spotlight-ribbon">{visual.caption}</figcaption>
+        </figure>
+        <div className="menu-list-wrap" aria-live="polite" aria-atomic="true">
+          <p className="menu-kicker">Coffee And Bites · Ludhiana</p>
+          <h3 className="menu-selection-title">{title}</h3>
+          <p className="menu-selection-copy">
+            {activeCategory === 'All'
+              ? 'Sandwiches, burgers, pizza, fast food, pasta and beverages.'
+              : `Browse the ${activeCategory.toLowerCase()} selection and current availability.`}
+          </p>
+          <a href={ZOMATO_ORDER_URL} target="_blank" rel="noopener noreferrer" className="button button-dark menu-zomato-link">
+            View the current menu <span aria-hidden="true">{'\u2197'}</span>
+          </a>
+          <p className="menu-footnote">Menu and availability are maintained on the restaurant’s Zomato listing.</p>
+        </div>
+      </div>
     </section>
   )
 }

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ZOMATO_ORDER_URL } from '../data/links'
 
 const navItems = [['Home', 'home'], ['Menu', 'menu'], ['About', 'about'], ['Gallery', 'gallery'], ['Contact', 'contact']]
 
@@ -26,6 +27,13 @@ function Navbar() {
     }
   }, [])
 
+  useEffect(() => {
+    if (!isMobile || !menuOpen) return undefined
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = previousOverflow }
+  }, [isMobile, menuOpen])
+
   const closeMenu = () => setMenuOpen(false)
 
   return (
@@ -39,7 +47,7 @@ function Navbar() {
           <ul className="nav-links">
             {navItems.map(([label, id], index) => <li key={id} style={{ '--nav-index': index }}><a href={`#${id}`} onClick={closeMenu}>{label}</a></li>)}
           </ul>
-          <a href="#contact" className="button button-primary nav-button" onClick={closeMenu}>Order Now <span aria-hidden="true">{'\u2197'}</span></a>
+          <a href={ZOMATO_ORDER_URL} target="_blank" rel="noopener noreferrer" className="button button-primary nav-button" onClick={closeMenu}>Order Now <span aria-hidden="true">{'\u2197'}</span></a>
           <span className="nav-note">A little warmth, every day</span>
         </div>
       </nav>
