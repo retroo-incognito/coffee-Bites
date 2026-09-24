@@ -17,8 +17,8 @@ function Menu({ menuItems, activeCategory, onChangeCategory }) {
       </div>
       {spotlight && <div className="menu-layout" key={activeCategory}>
         <article className="menu-spotlight">
-          <div className="menu-spotlight-image"><img src={spotlight.image} alt={spotlight.alt} loading="lazy" /><span className="spotlight-ribbon">A good place to start</span></div>
-          <div className="menu-spotlight-copy"><span className="menu-kicker">{spotlight.category} · house pick</span><h3>{spotlight.name}</h3><p>{spotlight.description}</p><strong className="menu-price">{rupees(spotlight.price)}</strong></div>
+          <div className="menu-spotlight-image"><img src={spotlight.image} alt={spotlight.alt} loading="lazy" /><span className="spotlight-ribbon">{spotlight.badge ?? 'A good place to start'}</span></div>
+          <div className="menu-spotlight-copy"><span className="menu-kicker">{spotlight.category} · {spotlight.badge ?? 'house pick'}</span><h3>{spotlight.name}</h3><p>{spotlight.description}</p><strong className="menu-price">{rupees(spotlight.price)}</strong></div>
         </article>
         <div className="menu-list-wrap" aria-live="polite">
           <div className="menu-list-heading"><span>From the kitchen</span><span>Price</span></div>

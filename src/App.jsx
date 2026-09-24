@@ -27,7 +27,7 @@ function App() {
     const timer = window.setTimeout(() => {
       try { window.localStorage.setItem('coffee-bites-intro-seen', 'yes') } catch { /* Storage can be disabled; the intro still finishes. */ }
       setShowLoader(false)
-    }, 2100)
+    }, 900)
     return () => window.clearTimeout(timer)
   }, [showLoader])
 
