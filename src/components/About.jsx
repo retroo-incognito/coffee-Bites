@@ -1,39 +1,18 @@
 function About() {
   return (
-    <section className="about-section" id="about">
-      <div className="about-media">
-        <img
-          src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=1200&q=80"
-          alt="Warm café interior with food and coffee at Coffee And Bites"
-        />
+    <section className="about-section" id="about" aria-labelledby="about-title">
+      <div className="about-visual">
+        <img src="/images/latte-pour.jpg" alt="A barista pouring a leaf pattern into a fresh latte" loading="lazy" />
+        <span className="about-photo-tag">Made for slow moments</span>
+        <span className="about-side-note">A warm cup, a little pause</span>
       </div>
-
       <div className="about-copy">
-        <p className="eyebrow">Our story</p>
-        <h2>A Place For Good Food &amp; Good Company</h2>
-        <p>
-          Coffee And Bites is a casual food and café destination in Ludhiana where people come together
-          to eat well, share a coffee and spend time in a comfortable, welcoming setting.
-        </p>
-        <p>
-          The menu brings together familiar favourites from burgers and sandwiches to pizza, pasta and
-          refreshing beverages, all prepared with attention to freshness, flavour and ease.
-        </p>
-
-        <div className="about-stats">
-          <div>
-            <strong>4.3/5</strong>
-            <span>Dining rating</span>
-          </div>
-          <div>
-            <strong>1,249</strong>
-            <span>Ratings</span>
-          </div>
-          <div>
-            <strong>Casual</strong>
-            <span>Atmosphere</span>
-          </div>
-        </div>
+        <p className="eyebrow">Our little corner in Ludhiana</p>
+        <h2 id="about-title">Made for<br /><em>slow moments.</em></h2>
+        <div className="about-quote"><span aria-hidden="true">“</span><p>Coffee tastes better when there’s time to enjoy it.</p></div>
+        <p>Coffee And Bites brings together coffee, comfort food, and good conversation. A familiar spot for a catch-up, a quick bite, or a moment to yourself.</p>
+        <p>Settle in with a cup, share something from the kitchen, and make a little room in the day.</p>
+        <a href="#location" className="text-link">Come find your corner <span aria-hidden="true">{'\u2197'}</span></a>
       </div>
     </section>
   )

@@ -1,5 +1,6 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import Navbar from './components/Navbar'
+import Loader from './components/Loader'
 import Hero from './components/Hero'
 import Menu from './components/Menu'
 import Featured from './components/Featured'
@@ -13,20 +14,48 @@ import { menuItems } from './data/menu'
 
 function App() {
   const [activeCategory, setActiveCategory] = useState('All')
-
-  const filteredMenu = useMemo(() => {
-    if (activeCategory === 'All') {
-      return menuItems
+  const [showLoader, setShowLoader] = useState(() => {
+    try {
+      return window.localStorage.getItem('coffee-bites-intro-seen') !== 'yes' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    } catch {
+      return true
     }
+  })
 
-    return menuItems.filter((item) => item.category === activeCategory)
-  }, [activeCategory])
+  useEffect(() => {
+    if (!showLoader) return undefined
+    const timer = window.setTimeout(() => {
+      try { window.localStorage.setItem('coffee-bites-intro-seen', 'yes') } catch { /* Storage can be disabled; the intro still finishes. */ }
+      setShowLoader(false)
+    }, 2100)
+    return () => window.clearTimeout(timer)
+  }, [showLoader])
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('.content > section:not(.hero-section)')
+    if (!('IntersectionObserver' in window)) return
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.08, rootMargin: '0px 0px -35px 0px' })
+    sections.forEach((section) => {
+      section.classList.add('section-reveal')
+      observer.observe(section)
+    })
+    return () => observer.disconnect()
+  }, [])
+
+  const filteredMenu = useMemo(() => activeCategory === 'All' ? menuItems : menuItems.filter((item) => item.category === activeCategory), [activeCategory])
 
   return (
     <div className="page-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar />
-
-      <main className="content">
+      <main className="content" id="main-content">
         <Hero />
         <Menu menuItems={filteredMenu} activeCategory={activeCategory} onChangeCategory={setActiveCategory} />
         <Featured />
@@ -36,8 +65,8 @@ function App() {
         <Location />
         <Contact />
       </main>
-
       <Footer />
+      {showLoader && <Loader />}
     </div>
   )
 }

@@ -1,41 +1,15 @@
 const featureItems = [
-  {
-    title: 'Freshly Prepared',
-    text: 'Food prepared with attention to freshness, flavour and comforting everyday quality.',
-  },
-  {
-    title: 'Something For Everyone',
-    text: 'Burgers, sandwiches, pizza, pasta and beverages served under one warm menu.',
-  },
-  {
-    title: 'Casual Atmosphere',
-    text: 'A comfortable place for meals, coffee and easy conversations throughout the day.',
-  },
-  {
-    title: 'Made For Cravings',
-    text: 'Comfort food and café favourites that hit the spot whenever you want a satisfying bite.',
-  },
+  { title: 'Something familiar', text: 'Comforting cafe classics that make choosing easy.' },
+  { title: 'A little variety', text: 'Burgers, sandwiches, pizza, pasta, quick bites and coffee.' },
+  { title: 'Room to catch up', text: 'An easy neighbourhood stop for conversation and a shared plate.' },
+  { title: 'Close to home', text: 'Find us near Baba Balak Nath Mandir on Jassian Road.' },
 ]
 
 function Features() {
   return (
-    <section className="features-section">
-      <div className="section-heading center-heading">
-        <p className="eyebrow">Why Coffee And Bites</p>
-        <h2>Comfort, flavour and a place to linger.</h2>
-      </div>
-
-      <div className="feature-list">
-        {featureItems.map((feature) => (
-          <article key={feature.title} className="feature-item">
-            <span className="feature-number">0{featureItems.indexOf(feature) + 1}</span>
-            <div>
-              <h3>{feature.title}</h3>
-              <p>{feature.text}</p>
-            </div>
-          </article>
-        ))}
-      </div>
+    <section className="features-section" aria-labelledby="why-title">
+      <div className="section-heading center-heading"><p className="eyebrow">The Coffee And Bites feeling</p><h2 id="why-title">A little comfort<br />in the middle of your day.</h2></div>
+      <div className="feature-list">{featureItems.map((feature, index) => <article key={feature.title} className="feature-item"><span className="feature-number">0{index + 1}</span><div><h3>{feature.title}</h3><p>{feature.text}</p></div></article>)}</div>
     </section>
   )
 }
