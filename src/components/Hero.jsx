@@ -2,7 +2,7 @@ import { GOOGLE_MAPS_DIRECTIONS_URL } from '../data/links'
 
 function Hero() {
   return (
-    <section className="hero-section" id="home" aria-labelledby="hero-title">
+    <section className="hero-section" id="home" tabIndex="-1" aria-labelledby="hero-title">
       <div className="hero-topline"><span>Independent cafe spirit</span><span>Ludhiana, Punjab <i aria-hidden="true" /></span></div>
       <div className="hero-composition">
         <div className="hero-photo">

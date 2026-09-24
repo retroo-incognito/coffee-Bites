@@ -13,7 +13,7 @@ import Footer from './components/Footer'
 import { menuCategories } from './data/menu'
 
 function App() {
-  const [activeCategory, setActiveCategory] = useState('All')
+  const [activeCategory, setActiveCategory] = useState(menuCategories[0])
   const [showLoader, setShowLoader] = useState(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
     try {
@@ -54,7 +54,7 @@ function App() {
     <div className="page-shell">
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar />
-      <main className="content" id="main-content">
+      <main className="content" id="main-content" tabIndex="-1">
         <Hero />
         <Menu categories={menuCategories} activeCategory={activeCategory} onChangeCategory={setActiveCategory} />
         <Featured />

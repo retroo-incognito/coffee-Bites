@@ -17,8 +17,8 @@ function Footer() {
       </div>
       <div className="footer-bottom">
         <span>Ludhiana, Punjab</span>
-        <span>11:00 AM – 8:30 PM</span>
-        <span>© {new Date().getFullYear()} Coffee And Bites</span>
+        <span>11:00 AM &ndash; 8:30 PM</span>
+        <span>&copy; {new Date().getFullYear()} Coffee And Bites</span>
       </div>
     </footer>
   )

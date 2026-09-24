@@ -1,6 +1,6 @@
 function About() {
   return (
-    <section className="about-section" id="about" aria-labelledby="about-title">
+    <section className="about-section" id="about" tabIndex="-1" aria-labelledby="about-title">
       <div className="about-visual">
         <img src="/images/latte-pour.jpg" alt="Latte art being poured into a cup" width="1000" height="667" loading="lazy" />
         <span className="about-photo-tag">Made for slow moments</span>

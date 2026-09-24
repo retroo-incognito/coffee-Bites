@@ -1,39 +1,31 @@
-export const menuCategories = ['All', 'Sandwich', 'Burger', 'Pizza', 'Fast Food', 'Pasta', 'Beverages']
+export const menuCategories = ['Sandwiches', 'Burgers', 'Pizza', 'Fast Food', 'Pasta', 'Beverages']
 
-export const categoryVisuals = {
-  All: {
-    image: '/images/coffee-pastry.jpg',
-    alt: 'Latte and fresh pastries on a wooden cafe table',
-    caption: 'Coffee, with a little something sweet',
-  },
-  Sandwich: {
-    image: '/images/grilled-cheese.jpg',
-    alt: 'Golden toasted cheese sandwich served with salad',
-    caption: 'A golden, comforting classic',
-  },
-  Burger: {
-    image: '/images/veggie-burger.jpg',
-    alt: 'Vegetarian burger layered with greens',
-    caption: 'A proper little bite',
-  },
-  Pizza: {
-    image: '/images/margherita.jpg',
-    alt: 'Margherita pizza with tomato, mozzarella and basil',
-    caption: 'A slice of comfort',
-  },
-  'Fast Food': {
-    image: '/images/golden-fries.jpg',
-    alt: 'Golden potato fries served with a fork',
-    caption: 'Something crisp and savoury',
-  },
-  Pasta: {
-    image: '/images/vegetarian-pasta.jpg',
-    alt: 'Vegetarian pasta with greens and tomato',
-    caption: 'A comforting bowl from the kitchen',
-  },
-  Beverages: {
-    image: '/images/latte-pour.jpg',
-    alt: 'Latte art being poured into a cup',
-    caption: 'A little pause, freshly poured',
-  },
-}
+// Sample vegetarian menu. Update item names, descriptions, and prices here.
+export const menuItems = [
+  { category: 'Sandwiches', name: 'Veg Grilled Sandwich', description: 'Grilled vegetables, cheese, and a crisp golden toast.', price: '\u20B9149' },
+  { category: 'Sandwiches', name: 'Cheese Sandwich', description: 'Melted cheese tucked into warm, toasted bread.', price: '\u20B9129' },
+  { category: 'Sandwiches', name: 'Paneer Tikka Sandwich', description: 'Spiced paneer, peppers, and a gentle tandoori touch.', price: '\u20B9189' },
+  { category: 'Sandwiches', name: 'Club Veg Sandwich', description: 'Fresh vegetables, greens, and creamy house dressing.', price: '\u20B9179' },
+  { category: 'Burgers', name: 'Classic Veg Burger', description: 'A golden vegetarian patty with lettuce and house sauce.', price: '\u20B9149' },
+  { category: 'Burgers', name: 'Cheese Veg Burger', description: 'A crisp veg patty layered with melted cheese.', price: '\u20B9169' },
+  { category: 'Burgers', name: 'Paneer Burger', description: 'Grilled paneer, crunchy lettuce, and a creamy sauce.', price: '\u20B9199' },
+  { category: 'Burgers', name: 'Crispy Veg Burger', description: 'A crunchy vegetable patty with fresh greens.', price: '\u20B9179' },
+  { category: 'Pizza', name: 'Margherita Pizza', description: 'Tomato, mozzarella, and basil on a crisp crust.', price: '\u20B9299' },
+  { category: 'Pizza', name: 'Veggie Delight Pizza', description: 'Garden vegetables, mozzarella, and a herbed tomato base.', price: '\u20B9349' },
+  { category: 'Pizza', name: 'Paneer Tikka Pizza', description: 'Tandoori paneer, peppers, and bubbling cheese.', price: '\u20B9399' },
+  { category: 'Pizza', name: 'Farmhouse Pizza', description: 'A colourful mix of vegetables and melted cheese.', price: '\u20B9379' },
+  { category: 'Fast Food', name: 'French Fries', description: 'Golden potato fries, lightly seasoned.', price: '\u20B999' },
+  { category: 'Fast Food', name: 'Peri Peri Fries', description: 'Crisp fries tossed with a lively peri peri seasoning.', price: '\u20B9129' },
+  { category: 'Fast Food', name: 'Garlic Bread', description: 'Toasted bread with fragrant garlic and herbs.', price: '\u20B9149' },
+  { category: 'Fast Food', name: 'Cheese Garlic Bread', description: 'Golden garlic bread finished with melted cheese.', price: '\u20B9179' },
+  { category: 'Pasta', name: 'White Sauce Pasta', description: 'Pasta in a creamy sauce with herbs and vegetables.', price: '\u20B9229' },
+  { category: 'Pasta', name: 'Red Sauce Pasta', description: 'A slow-simmered tomato sauce with garden herbs.', price: '\u20B9219' },
+  { category: 'Pasta', name: 'Arrabbiata Pasta', description: 'A bright tomato sauce with a gentle chilli warmth.', price: '\u20B9229' },
+  { category: 'Pasta', name: 'Creamy Veg Pasta', description: 'Seasonal vegetables folded through a creamy sauce.', price: '\u20B9249' },
+  { category: 'Beverages', name: 'Cappuccino', description: 'Espresso and steamed milk under soft, airy foam.', price: '\u20B9139' },
+  { category: 'Beverages', name: 'Cafe Latte', description: 'A smooth espresso with warm, silky milk.', price: '\u20B9149' },
+  { category: 'Beverages', name: 'Cold Coffee', description: 'Chilled coffee blended until smooth and creamy.', price: '\u20B9179' },
+  { category: 'Beverages', name: 'Chocolate Shake', description: 'A cool, rich chocolate and milk shake.', price: '\u20B9199' },
+  { category: 'Beverages', name: 'Oreo Shake', description: 'A creamy cookie and vanilla shake served cold.', price: '\u20B9219' },
+  { category: 'Beverages', name: 'Fresh Lime', description: 'Fresh lime, chilled water, and a little sweetness.', price: '\u20B999' },
+]

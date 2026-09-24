@@ -2,7 +2,7 @@ import { GOOGLE_MAPS_DIRECTIONS_URL, ZOMATO_ORDER_URL } from '../data/links'
 
 function Contact() {
   return (
-    <section className="contact-section" id="contact" aria-labelledby="contact-title">
+    <section className="contact-section" id="contact" tabIndex="-1" aria-labelledby="contact-title">
       <div className="contact-panel">
         <div className="contact-copy">
           <p className="eyebrow">The kettle is on</p>
@@ -16,7 +16,7 @@ function Contact() {
 
         <div className="contact-hours">
           <span className="hours-label">Come by</span>
-          <strong aria-label="11:00 AM to 8:30 PM">11:00 AM <i aria-hidden="true">–</i> 8:30 PM</strong>
+          <strong aria-label="11:00 AM to 8:30 PM">11:00 AM <i aria-hidden="true">&ndash;</i> 8:30 PM</strong>
           <span>Every day</span>
           <address>
             Near Baba Balak Nath Mandir<br />
