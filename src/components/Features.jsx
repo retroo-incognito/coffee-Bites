@@ -2,7 +2,7 @@ const featureItems = [
   { title: 'Something familiar', text: 'Comforting cafe classics that make choosing easy.' },
   { title: 'A little variety', text: 'Burgers, sandwiches, pizza, pasta, quick bites and coffee.' },
   { title: 'Room to catch up', text: 'An easy neighbourhood stop for conversation and a shared plate.' },
-  { title: 'Close to home', text: 'Find us near Baba Balak Nath Mandir on Jassian Road.' },
+  { title: 'Close to home', text: 'Find us near Baba Balak Nath Mandir on Jassian Village Road.' },
 ]
 
 function Features() {

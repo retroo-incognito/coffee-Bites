@@ -19,10 +19,11 @@ function Contact() {
           <strong aria-label="11:00 AM to 8:30 PM">11:00 AM <i aria-hidden="true">&ndash;</i> 8:30 PM</strong>
           <span>Every day</span>
           <address>
+            Jassian Village Rd<br />
             Near Baba Balak Nath Mandir<br />
-            Jassian Road, Haibowal Kalan<br />
-            Police Station Haibowal<br />
-            Ludhiana, Punjab
+            Heera Singh Nagar, New Tagore Nagar<br />
+            Haibowal Kalan, Ludhiana<br />
+            Punjab 144001
           </address>
         </div>
         <span className="contact-bean bean-one" aria-hidden="true" />
