@@ -7,6 +7,7 @@ import Featured from './components/Featured'
 import About from './components/About'
 import Features from './components/Features'
 import Gallery from './components/Gallery'
+import CoffeeExperience from './components/CoffeeExperience'
 import Location from './components/Location'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
@@ -60,6 +61,7 @@ function App() {
         <Featured />
         <About />
         <Features />
+        <CoffeeExperience />
         <Gallery />
         <Location />
         <Contact />

@@ -1,4 +1,4 @@
-import { GOOGLE_MAPS_DIRECTIONS_URL } from '../data/links'
+import { ZOMATO_ORDER_URL } from '../data/links'
 
 function Hero() {
   return (
@@ -19,7 +19,10 @@ function Hero() {
       </div>
       <div className="hero-foot">
         <p>Pull up a chair for a comforting plate, a well-made coffee, and the kind of afternoon that takes its time.</p>
-        <div className="hero-actions"><a href="#menu" className="button button-primary">Explore Menu <span aria-hidden="true">{'\u2198'}</span></a><a href={GOOGLE_MAPS_DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="button button-secondary">Get Directions <span aria-hidden="true">{'\u2197'}</span></a></div>
+        <div className="hero-actions">
+          <a href={ZOMATO_ORDER_URL} target="_blank" rel="noopener noreferrer" className="button button-primary">Order Now <span aria-hidden="true">{'\u2197'}</span></a>
+          <a href="#menu" className="button button-secondary">Explore Menu <span aria-hidden="true">{'\u2198'}</span></a>
+        </div>
       </div>
     </section>
   )

@@ -197,6 +197,20 @@ h2 em { color: var(--caramel); font-weight: 400; }
 .feature-item h3 { color: var(--beige); font-size: 1.35rem; line-height: 1.15; }
 .feature-item p { margin: .55rem 0 0; color: var(--cream); font-size: .73rem; line-height: 1.6; }
 
+.coffee-experience-section { padding-top: clamp(5rem,9vw,8rem); padding-bottom: clamp(5rem,9vw,8rem); }
+.coffee-experience-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; align-items: center; gap: clamp(2rem,5vw,5rem); }
+.coffee-intro { max-width: 500px; }
+.coffee-intro h2 { font-size: clamp(3rem,5.7vw,5.8rem); }
+.coffee-intro p:not(.eyebrow) { margin: 1rem 0 0; color: var(--cream); font-size: .9rem; line-height: 1.8; }
+.coffee-cta-row { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 1.5rem; }
+.coffee-portrait { position: relative; min-height: 520px; overflow: hidden; border: 1px solid var(--roast); background: var(--mocha); }
+.coffee-portrait img { height: 100%; object-fit: cover; }
+.coffee-badge { position: absolute; left: 1.2rem; bottom: 1.2rem; z-index: 2; padding: .65rem .8rem; background: rgba(62,42,31,.7); border: 1px solid rgba(232,213,183,.45); color: var(--beige); font-family: 'Playfair Display',serif; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase; }
+.coffee-steam { position: absolute; top: 0; left: 50%; width: min(46%, 220px); height: 60%; transform: translateX(-50%); }
+.coffee-steam path { stroke: rgba(232,213,183,.75); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 180; animation: steam-drift 3.2s infinite ease-in-out; }
+.coffee-steam path:nth-child(2) { animation-delay: .5s; }
+.coffee-steam path:nth-child(3) { animation-delay: 1s; }
+
 /* Gallery: six little windows, each with a different shape */
 .gallery-section { padding-top: clamp(6rem,11vw,10rem); padding-bottom: clamp(6rem,10vw,9rem); }
 .gallery-heading { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-bottom: 2.5rem; }
@@ -284,6 +298,7 @@ h2 em { color: var(--caramel); font-weight: 400; }
   .favourite-layout { min-height: 470px; }.favourite-photo { min-height: 470px; }.favourite-copy { padding: 2rem; }
   .about-section { gap: 3rem; }.about-visual,.about-visual img { min-height: 450px; height: 450px; }.about-section { grid-template-columns: 1fr .9fr; }
   .features-section .center-heading { display: block; }.feature-list { grid-template-columns: repeat(2,minmax(0,1fr)); row-gap: 1rem; }
+  .coffee-experience-layout { grid-template-columns: 1fr; }.coffee-intro { max-width: 100%; }.coffee-portrait { min-height: 420px; }
   .gallery-collage { grid-template-columns: 1fr 1fr 1fr; grid-template-rows: 215px 190px 185px; }.gallery-item-1 { grid-column: 1 / 3; grid-row: 1 / 3; }.gallery-item-2 { grid-column: 3; grid-row: 1; }.gallery-item-3 { grid-column: 3; grid-row: 2; }.gallery-item-4 { grid-column: 1; grid-row: 3; }.gallery-item-5 { grid-column: 2; grid-row: 3; }.gallery-item-6 { grid-column: 3; grid-row: 3; }
   .location-layout { grid-template-columns: 1.1fr .9fr; }.contact-panel { min-height: 320px; padding: 2.5rem; }
 }
@@ -304,6 +319,7 @@ h2 em { color: var(--caramel); font-weight: 400; }
   .featured-topline { margin-bottom: .75rem; }.featured-topline > span i { width: 30px; }.favourite-layout { grid-template-columns: 1fr; }.favourite-photo { min-height: 0; height: 60vw; max-height: 340px; }.favourite-copy { padding: 1.6rem 1.3rem 1.4rem; }.favourite-copy h2 { font-size: 3.3rem; }.favourite-copy h2 br { display: none; }.favourite-rule { margin-block: .2rem .8rem; }.favourite-copy h3 { font-size: 1.55rem; }.favourite-description { font-size: .77rem; }.favourite-actions { margin-top: 1rem; }
   .about-section { grid-template-columns: 1fr; gap: 2.5rem; padding-block: 5rem; }.about-visual,.about-visual img { min-height: 0; height: 78vw; max-height: 430px; }.about-visual { margin-right: .5rem; }.about-side-note { left: -1.3rem; font-size: .51rem; }.about-photo-tag { right: -8px; bottom: 25px; padding: .65rem .8rem; font-size: .78rem; }.about-copy h2 { font-size: clamp(3.15rem,12vw,4.5rem); }.about-copy > p:not(.eyebrow) { font-size: .82rem; }
   .features-section { padding-block: 4.5rem; }.features-section .center-heading { margin-bottom: 1.8rem; }.features-section .center-heading h2 { font-size: 2.8rem; }.feature-list { grid-template-columns: 1fr; }.feature-item { grid-template-columns: 28px 1fr; padding: 1rem 0; border-bottom: 1px solid var(--roast); }.feature-item h3 { font-size: 1.25rem; }.feature-item p { margin-top: .3rem; }
+  .coffee-experience-section { padding-top: 4rem; padding-bottom: 4rem; }.coffee-experience-layout { grid-template-columns: 1fr; gap: 1.5rem; }.coffee-intro h2 { font-size: clamp(2.8rem,14vw,4rem); }.coffee-portrait { min-height: 360px; }.coffee-badge { left: 1rem; bottom: 1rem; font-size: .7rem; }
   .gallery-heading { flex-direction: column; align-items: flex-start; gap: 1rem; }.gallery-heading h2 { font-size: clamp(3.05rem,12vw,4.35rem); }.gallery-heading > p { font-size: .9rem; }.gallery-collage { grid-template-columns: 1.05fr .95fr; grid-template-rows: 240px 160px 210px 170px; gap: 7px; }.gallery-item-1 { grid-column: 1 / 3; grid-row: 1; }.gallery-item-2 { grid-column: 1; grid-row: 2 / 4; }.gallery-item-3 { grid-column: 2; grid-row: 2; }.gallery-item-4 { grid-column: 2; grid-row: 3; }.gallery-item-5 { grid-column: 1 / 3; grid-row: 4; }.gallery-item-6 { display: none; }.gallery-item figcaption { right: .55rem; bottom: .55rem; left: .65rem; font-size: .77rem; }.gallery-item figcaption i { width: 23px; height: 23px; font-size: .62rem; }
   .location-intro h2 { font-size: 3.5rem; }.location-layout { grid-template-columns: 1fr; }.location-illustration { min-height: 275px; }.location-address { padding: 1.6rem .25rem 0; }.location-address > p { font-size: .78rem; }
   .contact-panel { grid-template-columns: 1fr; gap: 1.6rem; min-height: 0; padding: 2rem 1.4rem; }.contact-copy h2 { font-size: clamp(3.8rem,17vw,4.6rem); }.contact-copy > p:last-child { margin-top: .4rem; }.contact-hours { gap: .2rem; padding: 1.3rem 0 0; border-top: 1px solid rgba(90,62,46,.4); border-left: 0; }.contact-hours > strong { font-size: clamp(1.3rem,6vw,2rem); white-space: normal; }.contact-hours address { margin-top: .8rem; }.contact-bean { right: 8%; top: 42%; }.bean-two { display: none; }
