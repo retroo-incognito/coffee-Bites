@@ -15,23 +15,42 @@ import { menuCategories } from './data/menu'
 
 function App() {
   const [activeCategory, setActiveCategory] = useState(menuCategories[0])
-  const [showLoader, setShowLoader] = useState(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false
-    try {
-      return window.localStorage.getItem('coffee-bites-intro-seen') !== 'yes'
-    } catch {
-      return true
-    }
-  })
+  const [loadStage, setLoadStage] = useState('loading')
 
   useEffect(() => {
-    if (!showLoader) return undefined
-    const timer = window.setTimeout(() => {
-      try { window.localStorage.setItem('coffee-bites-intro-seen', 'yes') } catch { /* Storage can be disabled; the intro still finishes. */ }
-      setShowLoader(false)
-    }, 2050)
-    return () => window.clearTimeout(timer)
-  }, [showLoader])
+    document.getElementById('boot-splash')?.remove()
+
+    let cancelled = false
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    const startedAt = performance.now()
+    const minDuration = reduceMotion ? 250 : 1500
+    const maxDuration = reduceMotion ? 500 : 1900
+    const heroImage = document.querySelector('.hero-photo img')
+    const imageReady = !heroImage || heroImage.complete
+      ? Promise.resolve()
+      : new Promise((resolve) => {
+          heroImage.addEventListener('load', resolve, { once: true })
+          heroImage.addEventListener('error', resolve, { once: true })
+        })
+    const fontsReady = document.fonts?.ready ?? Promise.resolve()
+    const pageReady = Promise.race([
+      Promise.allSettled([imageReady, fontsReady]),
+      new Promise((resolve) => window.setTimeout(resolve, maxDuration)),
+    ])
+
+    pageReady.then(() => {
+      const remaining = Math.max(0, minDuration - (performance.now() - startedAt))
+      window.setTimeout(() => {
+        if (cancelled) return
+        setLoadStage('exiting')
+        window.setTimeout(() => {
+          if (!cancelled) setLoadStage('ready')
+        }, 650)
+      }, remaining)
+    })
+
+    return () => { cancelled = true }
+  }, [])
 
   useEffect(() => {
     const sections = document.querySelectorAll('.content > section:not(.hero-section)')
@@ -52,7 +71,7 @@ function App() {
   }, [])
 
   return (
-    <div className="page-shell">
+    <div className={`page-shell page-shell--${loadStage}`}>
       <a className="skip-link" href="#main-content">Skip to content</a>
       <Navbar />
       <main className="content" id="main-content" tabIndex="-1">
@@ -67,7 +86,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
-      {showLoader && <Loader />}
+      {loadStage !== 'ready' && <Loader exiting={loadStage === 'exiting'} />}
     </div>
   )
 }

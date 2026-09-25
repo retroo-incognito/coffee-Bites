@@ -5,6 +5,11 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#3E2A1F" />
+    <style>
+      html,body{min-height:100%;background:#3E2A1F}
+      #boot-splash{position:fixed;inset:0;z-index:9999;display:grid;place-content:center;text-align:center;background:#3E2A1F;color:#E8D5B7;font:500 1.15rem Georgia,serif;letter-spacing:.2em}
+      #boot-splash span{color:#C8A27A;font-style:italic}
+    </style>
     <meta name="description" content="Coffee And Bites is a vegetarian cafe in Haibowal Kalan, Ludhiana, with sandwiches, burgers, pizza, fast food, pasta and beverages." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Coffee And Bites | Cafe &amp; Fast Food in Ludhiana" />
@@ -18,6 +23,7 @@
     <title>Coffee And Bites | Cafe &amp; Fast Food in Ludhiana</title>
   </head>
   <body>
+    <div id="boot-splash" aria-hidden="true">COFFEE <span>&amp;</span> BITES</div>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

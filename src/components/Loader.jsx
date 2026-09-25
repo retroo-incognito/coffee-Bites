@@ -1,8 +1,7 @@
-function Loader() {
+function Loader({ exiting = false }) {
   return (
-    <div className="coffee-loader" role="status" aria-label="Brewing something good">
+    <div className={`coffee-loader${exiting ? ' is-exiting' : ''}`} role="status" aria-label="Brewing something good" aria-live="polite">
       <div className="loader-content">
-        <p className="loader-wordmark">COFFEE <span>&amp;</span> BITES</p>
         <svg className="loader-cup" viewBox="0 0 120 112" fill="none" aria-hidden="true">
           <path className="steam steam-one" d="M42 36c-9-10 8-12 0-23" />
           <path className="steam steam-two" d="M60 34c-9-10 8-12 0-23" />
@@ -12,7 +11,8 @@ function Loader() {
           <path d="M19 102h82" stroke="var(--caramel)" strokeWidth="2" />
           <path className="coffee-fill" d="M27 57h58l-4 27H31l-4-27Z" fill="var(--caramel)" />
         </svg>
-        <p className="loader-caption">Brewing something good<span className="loader-ellipsis">...</span></p>
+        <p className="loader-wordmark">COFFEE <span>&amp;</span> BITES</p>
+        <p className="loader-caption">Brewing something good</p>
       </div>
     </div>
   )
