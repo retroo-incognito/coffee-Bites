@@ -1,9 +1,11 @@
+import BrandLogo from './BrandLogo'
+
 function Footer() {
   return (
     <footer className="site-footer">
       <a href="#home" className="footer-signoff" aria-label="Coffee And Bites, back to top">
-        <span>COFFEE <i>&amp;</i> BITES</span>
-        <small>Good food. Good company.</small>
+        <BrandLogo dark />
+        <small>Good food. Excellent coffee alibis.</small>
       </a>
       <div className="footer-navigation">
         <span>Take another look</span>
@@ -17,7 +19,6 @@ function Footer() {
       </div>
       <div className="footer-bottom">
         <span>Ludhiana, Punjab</span>
-        <span>11:00 AM &ndash; 8:30 PM</span>
         <span>&copy; {new Date().getFullYear()} Coffee And Bites</span>
       </div>
     </footer>

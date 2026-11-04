@@ -14,10 +14,9 @@ function Contact() {
           </div>
         </div>
 
-        <div className="contact-hours">
-          <span className="hours-label">Come by</span>
-          <strong aria-label="11:00 AM to 8:30 PM">11:00 AM <i aria-hidden="true">&ndash;</i> 8:30 PM</strong>
-          <span>Every day</span>
+        <div className="contact-place">
+          <span className="contact-place-label">A little corner in</span>
+          <strong>Ludhiana, Punjab</strong>
           <address>
             Jassian Village Rd<br />
             Near Baba Balak Nath Mandir<br />
@@ -26,8 +25,6 @@ function Contact() {
             Punjab 144001
           </address>
         </div>
-        <span className="contact-bean bean-one" aria-hidden="true" />
-        <span className="contact-bean bean-two" aria-hidden="true" />
       </div>
     </section>
   )

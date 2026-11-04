@@ -1,60 +1,58 @@
-import { menuItems } from '../data/menu'
+import { ZOMATO_ORDER_URL } from "../data/links";
 
-function Menu({ categories, activeCategory, onChangeCategory }) {
-  const activeIndex = Math.max(0, categories.indexOf(activeCategory))
-  const showCategory = (index) => onChangeCategory(categories[(index + categories.length) % categories.length])
-
+function Menu() {
   return (
-    <section className="menu-section" id="menu" tabIndex="-1" aria-labelledby="menu-title">
+    <section
+      className="menu-section"
+      id="menu"
+      tabIndex="-1"
+      aria-labelledby="menu-title"
+    >
       <div className="menu-heading">
         <div>
-          <p className="eyebrow">A little something for everyone</p>
-          <h2 id="menu-title">Find your kind<br /><em>of comfort.</em></h2>
+          <p className="eyebrow">Something for the table</p>
+          <h2 id="menu-title">
+            Your next
+            <br />
+            <em>good thing.</em>
+          </h2>
         </div>
-        <p className="menu-aside-note">A simple little menu for coffee breaks, shared plates, and whatever sounds good today.</p>
+        <p className="menu-aside-note">
+          For highly important coffee and bite decisions. Find the current menu
+          and availability on Zomato.
+        </p>
       </div>
-      <div className="menu-carousel-controls">
-        <div className="menu-tabs" role="group" aria-label="Choose a menu category">
-        {categories.map((category) => (
-          <button
-            key={category}
-            type="button"
-            className={`filter-button${category === activeCategory ? ' active' : ''}`}
-            aria-pressed={category === activeCategory}
-            onClick={() => onChangeCategory(category)}
+      <div className="menu-feature">
+        <figure className="menu-feature-image">
+          <img
+            src="/images/margherita.jpg"
+            alt="Margherita pizza topped with tomato, melted cheese and basil"
+            width="1100"
+            height="1375"
+            loading="lazy"
+            decoding="async"
+          />
+          <figcaption>Good things, shared around the table</figcaption>
+        </figure>
+        <div className="menu-feature-copy">
+          <span>COFFEE / BITES / GOOD COMPANY</span>
+          <p>
+            Come hungry.
+            <br />
+            Leave a little <em>happier.</em>
+          </p>
+          <a
+            href={ZOMATO_ORDER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button-primary"
           >
-            {category}
-          </button>
-        ))}
+            See the current menu <span aria-hidden="true">{"\u2197"}</span>
+          </a>
         </div>
-        <div className="menu-slider-nav" aria-label="Menu category slides">
-          <span aria-live="polite">{String(activeIndex + 1).padStart(2, '0')} <i>/</i> {String(categories.length).padStart(2, '0')}</span>
-          <button type="button" className="menu-slide-arrow" aria-label="Previous menu category" onClick={() => showCategory(activeIndex - 1)}>
-            <span aria-hidden="true">{'\u2190'}</span>
-          </button>
-          <button type="button" className="menu-slide-arrow" aria-label="Next menu category" onClick={() => showCategory(activeIndex + 1)}>
-            <span aria-hidden="true">{'\u2192'}</span>
-          </button>
-        </div>
-      </div>
-      <div className="menu-menu-list" key={activeCategory} aria-live="polite">
-        <section className="menu-category-group" aria-labelledby={`menu-category-${activeCategory.toLowerCase().replaceAll(' ', '-')}`}>
-          <h3 id={`menu-category-${activeCategory.toLowerCase().replaceAll(' ', '-')}`}>{activeCategory}</h3>
-          <ul>
-            {menuItems.filter((item) => item.category === activeCategory).map((item) => (
-              <li className="menu-item" key={item.name}>
-                <div className="menu-item-heading">
-                  <h4>{item.name}</h4>
-                  <span>{item.price}</span>
-                </div>
-                <p>{item.description}</p>
-              </li>
-            ))}
-          </ul>
-        </section>
       </div>
     </section>
-  )
+  );
 }
 
-export default Menu
+export default Menu;
