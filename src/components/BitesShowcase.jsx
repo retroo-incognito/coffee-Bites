@@ -1,9 +1,9 @@
 import { ZOMATO_ORDER_URL } from '../data/links'
 
 const bites = [
-  { src: '/images/veggie-burger.jpg', alt: 'Vegetarian burger with leafy greens on a seeded bun', note: 'A good excuse to stay for lunch' },
-  { src: '/images/golden-fries.jpg', alt: 'Golden potato fries served with a fork', note: 'The side order with main-character energy' },
-  { src: '/images/margherita.jpg', alt: 'Margherita pizza topped with tomato, melted cheese and basil', note: 'One more slice is a sensible plan' },
+  { src: '/images/veggie-burger.jpg', alt: 'Vegetarian burger with leafy greens on a seeded bun', note: 'A very good table companion' },
+  { src: '/images/golden-fries.jpg', alt: 'Golden potato fries served with a fork', note: 'The side with main-character energy' },
+  { src: '/images/margherita.jpg', alt: 'Margherita pizza topped with tomato, melted cheese and basil', note: 'Share, if you’re feeling generous' },
 ]
 
 function BitesShowcase() {

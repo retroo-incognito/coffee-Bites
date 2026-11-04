@@ -18,7 +18,7 @@ function CoffeeExperience() {
 
         <div className="coffee-portrait" aria-label="Warm coffee and pastry still life">
           <img src="/images/coffee-pastry.jpg" alt="Latte and pastries set out for a coffee break" width="1800" height="1207" loading="lazy" />
-          <span className="table-badge" aria-hidden="true">For the<br />table</span>
+          <span className="coffee-badge" aria-hidden="true">For the<br />table</span>
         </div>
       </div>
     </section>

@@ -115,7 +115,7 @@ function App() {
     const minimumDisplay = reduceMotion ? 0 : visited ? 420 : 1850
     const startedAt = performance.now()
     const heroImage = document.querySelector('.hero-photo img')
-    const settleWithin = async (promise, timeout = 8000) => {
+    const settleWithin = async (promise, timeout = 12000) => {
       let timer = 0
       try {
         await Promise.race([
