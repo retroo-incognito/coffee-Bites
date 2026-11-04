@@ -8,10 +8,10 @@ function About() {
       </div>
       <div className="about-copy">
         <p className="eyebrow">Our little corner in Ludhiana</p>
-        <h2 id="about-title">Made for<br /><em>slow moments.</em></h2>
-        <div className="about-quote"><span aria-hidden="true">&ldquo;</span><p>Coffee tastes better when there&rsquo;s time to enjoy it.</p></div>
+        <h2 id="about-title">A place for<br /><em>the in-between.</em></h2>
+        <div className="about-quote"><span aria-hidden="true">&ldquo;</span><p>One coffee turned into three. No regrets.</p></div>
         <p>Coffee And Bites brings together coffee, vegetarian comfort food, and good conversation. A neighbourhood spot for a catch-up, a quick bite, or a moment to yourself.</p>
-        <p>Settle in with a cup, share something from the kitchen, and make a little room in the day.</p>
+        <p>No grand occasion required. A catch-up, a small celebration, or a Tuesday that needs improving will do nicely.</p>
         <a href="#location" className="text-link">Come find your corner <span aria-hidden="true">{'\u2197'}</span></a>
       </div>
     </section>
