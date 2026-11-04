@@ -2,18 +2,29 @@ import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react
 import Navbar from './components/Navbar'
 import Loader from './components/Loader'
 import Hero from './components/Hero'
+import EditorialIntroduction from './components/EditorialIntroduction'
 import Menu from './components/Menu'
 import Featured from './components/Featured'
 import About from './components/About'
 import Features from './components/Features'
 import Gallery from './components/Gallery'
 import CoffeeExperience from './components/CoffeeExperience'
+import BitesShowcase from './components/BitesShowcase'
 import Location from './components/Location'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 
+function getLoaderProgressDuration() {
+  try {
+    return window.sessionStorage.getItem('coffee-bites-visited') === 'yes' ? 140 : 1570
+  } catch {
+    return 1570
+  }
+}
+
 function App() {
   const [loadStage, setLoadStage] = useState('loading')
+  const [loaderDuration] = useState(getLoaderProgressDuration)
   const navigationRequest = useRef(0)
 
   const getSectionId = useCallback((value) => {
@@ -95,37 +106,70 @@ function App() {
 
     let cancelled = false
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    const maxDuration = 1400
-    const exitDuration = reduceMotion ? 0 : 560
+    const exitDuration = reduceMotion ? 0 : 450
+    let exitTimer = 0
+    let minimumTimer = 0
+    const visited = (() => {
+      try { return window.sessionStorage.getItem('coffee-bites-visited') === 'yes' } catch { return false }
+    })()
+    const minimumDisplay = reduceMotion ? 0 : visited ? 420 : 1850
+    const startedAt = performance.now()
     const heroImage = document.querySelector('.hero-photo img')
-    const imageReady = !heroImage || heroImage.complete
-      ? Promise.resolve()
-      : new Promise((resolve) => {
-          heroImage.addEventListener('load', resolve, { once: true })
-          heroImage.addEventListener('error', resolve, { once: true })
-        })
-    const fontsReady = document.fonts?.ready ?? Promise.resolve()
-    const pageReady = reduceMotion
-      ? Promise.resolve()
-      : Promise.race([
-          Promise.allSettled([imageReady, fontsReady]),
-          new Promise((resolve) => window.setTimeout(resolve, maxDuration)),
+    const settleWithin = async (promise, timeout = 8000) => {
+      let timer = 0
+      try {
+        await Promise.race([
+          Promise.resolve(promise),
+          new Promise((resolve) => { timer = window.setTimeout(resolve, timeout) }),
         ])
+      } finally {
+        window.clearTimeout(timer)
+      }
+    }
+    const imageReady = !heroImage
+      ? Promise.resolve()
+      : heroImage.complete
+        ? heroImage.decode?.().catch(() => undefined) ?? Promise.resolve()
+        : new Promise((resolve) => {
+            heroImage.addEventListener('load', resolve, { once: true })
+            heroImage.addEventListener('error', resolve, { once: true })
+          }).then(() => heroImage.decode?.().catch(() => undefined))
+    const documentReady = document.readyState === 'complete'
+      ? Promise.resolve()
+      : new Promise((resolve) => window.addEventListener('load', resolve, { once: true }))
+    const appReady = new Promise((resolve) => window.requestAnimationFrame(() => window.requestAnimationFrame(resolve)))
+    const readiness = Promise.allSettled([
+      settleWithin(imageReady),
+      settleWithin(document.fonts?.ready ?? Promise.resolve()),
+      settleWithin(documentReady),
+      appReady,
+    ])
 
-    pageReady.then(() => {
+    readiness.then(async () => {
+      const remaining = Math.max(0, minimumDisplay - (performance.now() - startedAt))
+      if (remaining) await new Promise((resolve) => { minimumTimer = window.setTimeout(resolve, remaining) })
       if (cancelled) return
       setLoadStage('exiting')
-      if (exitDuration) window.setTimeout(() => {
+      if (exitDuration) exitTimer = window.setTimeout(() => {
         if (!cancelled) setLoadStage('ready')
       }, exitDuration)
       else setLoadStage('ready')
     })
 
-    return () => { cancelled = true }
+    return () => {
+      cancelled = true
+      window.clearTimeout(exitTimer)
+      window.clearTimeout(minimumTimer)
+    }
   }, [])
 
   useEffect(() => {
-    const sections = document.querySelectorAll('.content > section:not(.hero-section)')
+    if (loadStage !== 'ready') return
+    try { window.sessionStorage.setItem('coffee-bites-visited', 'yes') } catch { /* Storage may be disabled. */ }
+  }, [loadStage])
+
+  useEffect(() => {
+    const sections = document.querySelectorAll('.content > section:not(.hero-section), .site-footer')
     if (!('IntersectionObserver' in window)) return
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -148,17 +192,19 @@ function App() {
       <Navbar />
       <main className="content" id="main-content" tabIndex="-1">
         <Hero />
+        <EditorialIntroduction />
         <Menu />
         <Featured />
         <About />
         <Features />
         <CoffeeExperience />
+        <BitesShowcase />
         <Gallery />
         <Location />
         <Contact />
       </main>
       <Footer />
-      {loadStage !== 'ready' && <Loader exiting={loadStage === 'exiting'} />}
+      {loadStage !== 'ready' && <Loader exiting={loadStage === 'exiting'} duration={loaderDuration} />}
     </div>
   )
 }
