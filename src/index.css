@@ -104,6 +104,14 @@ figure {
   border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
+  transition: background 0.35s, box-shadow 0.35s, border-color 0.35s;
+  animation: nav-arrive 0.75s 0.12s both cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.site-header.scrolled {
+  background: color-mix(in srgb, var(--paper-light) 94%, transparent);
+  border-color: #2b19121c;
+  box-shadow: 0 8px 28px #2b19120b;
+  backdrop-filter: blur(14px);
 }
 .navbar {
   min-height: var(--header);
@@ -118,7 +126,11 @@ figure {
   align-items: center;
   gap: 11px;
   display: flex;
+  transition: transform .35s cubic-bezier(.2,.7,.2,1);
 }
+.brand-link:hover { transform: translateY(-1px); }
+.brand-link:hover .brand-emblem { transform: rotate(-7deg); }
+.brand-emblem { transition: transform .45s cubic-bezier(.2,.7,.2,1); }
 .brand-logo {
   --logo-ink: var(--ink);
   --logo-accent: var(--red);
@@ -192,6 +204,23 @@ figure {
 .nav-panel {
   gap: clamp(18px, 3vw, 42px);
 }
+.nav-edition {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 8px;
+  letter-spacing: .13em;
+  white-space: nowrap;
+}
+.nav-edition i {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  vertical-align: 1px;
+}
+.nav-edition b { color: var(--caramel); padding-inline: 4px; }
 .nav-links {
   gap: clamp(14px, 2.2vw, 32px);
   margin: 0;
@@ -203,6 +232,8 @@ figure {
   font-size: 12px;
   position: relative;
 }
+.nav-links a[aria-current="location"] { color: var(--red); }
+.nav-index { display: none; }
 .nav-links a:after {
   content: "";
   background: var(--red);
@@ -216,9 +247,11 @@ figure {
   transform: scaleX(0);
 }
 .nav-links a:hover:after,
-.nav-links a:focus-visible:after {
+.nav-links a:focus-visible:after,
+.nav-links a[aria-current="location"]:after {
   transform: scaleX(1);
 }
+.nav-button { min-height: 42px; padding-inline: 17px; }
 .nav-toggle,
 .nav-note {
   display: none;
@@ -237,7 +270,8 @@ figure {
     background 0.2s,
     color 0.2s,
     border-color 0.2s,
-    transform 0.2s;
+    transform 0.28s cubic-bezier(.2,.7,.2,1),
+    box-shadow 0.28s;
   display: inline-flex;
 }
 .button span {
@@ -246,6 +280,7 @@ figure {
 }
 .button:hover {
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px #2b191226;
 }
 .button:hover span {
   transform: translate(3px, -2px);
@@ -1212,13 +1247,61 @@ h1 em {
   font-size: 9px;
   display: flex;
 }
-.section-reveal {
+/* Each section enters with a motion that follows its composition. */
+.section-reveal :is(.menu-heading, .featured-topline, .gallery-heading, .location-intro),
+.section-reveal .section-heading {
   opacity: 0;
-  transition: opacity 0.45s ease;
+  transform: translateY(18px);
+  transition: opacity .65s ease, transform .8s cubic-bezier(.2,.7,.2,1);
 }
-.section-reveal.is-visible {
-  opacity: 1;
+.section-reveal.is-visible :is(.menu-heading, .featured-topline, .gallery-heading, .location-intro),
+.section-reveal.is-visible .section-heading { opacity: 1; transform: none; }
+.section-reveal .menu-feature-image,
+.section-reveal .favourite-photo,
+.section-reveal .about-visual,
+.section-reveal .coffee-portrait,
+.section-reveal .location-illustration {
+  clip-path: inset(0 0 0 100%);
+  transition: clip-path 1s cubic-bezier(.76,0,.24,1);
 }
+.section-reveal.is-visible .menu-feature-image,
+.section-reveal.is-visible .favourite-photo,
+.section-reveal.is-visible .about-visual,
+.section-reveal.is-visible .coffee-portrait,
+.section-reveal.is-visible .location-illustration { clip-path: inset(0); }
+.section-reveal .menu-feature-copy,
+.section-reveal .favourite-copy,
+.section-reveal .about-copy,
+.section-reveal .coffee-intro,
+.section-reveal .location-address,
+.section-reveal .contact-panel {
+  opacity: 0;
+  transform: translateX(24px);
+  transition: opacity .65s .16s ease, transform .85s .16s cubic-bezier(.2,.7,.2,1);
+}
+.section-reveal.is-visible .menu-feature-copy,
+.section-reveal.is-visible .favourite-copy,
+.section-reveal.is-visible .about-copy,
+.section-reveal.is-visible .coffee-intro,
+.section-reveal.is-visible .location-address,
+.section-reveal.is-visible .contact-panel { opacity: 1; transform: none; }
+.section-reveal .feature-item,
+.section-reveal .gallery-item {
+  opacity: 0;
+  transform: translateY(16px) scale(.985);
+  transition: opacity .55s ease, transform .75s cubic-bezier(.2,.7,.2,1);
+}
+.section-reveal.is-visible .feature-item,
+.section-reveal.is-visible .gallery-item { opacity: 1; transform: none; }
+.section-reveal.is-visible .feature-item:nth-child(2),
+.section-reveal.is-visible .gallery-item:nth-child(2) { transition-delay: .08s; }
+.section-reveal.is-visible .feature-item:nth-child(3),
+.section-reveal.is-visible .gallery-item:nth-child(3) { transition-delay: .16s; }
+.section-reveal.is-visible .feature-item:nth-child(4),
+.section-reveal.is-visible .gallery-item:nth-child(4) { transition-delay: .24s; }
+.section-reveal.is-visible .gallery-item:nth-child(5) { transition-delay: .32s; }
+.section-reveal.is-visible .gallery-item:nth-child(6) { transition-delay: .4s; }
+.hero-scroll:hover i { animation: none; }
 .coffee-loader {
   z-index: 90;
   background: var(--ink);
@@ -1380,6 +1463,7 @@ h1 em {
 }
 
 @media (width<=1050px) {
+  .nav-edition { display: none; }
   .navbar {
     gap: 16px;
   }
@@ -1411,6 +1495,10 @@ h1 em {
     padding-left: 13px;
   }
 }
+@keyframes nav-arrive {
+  from { opacity: 0; transform: translateY(-9px); }
+  to { opacity: 1; transform: none; }
+}
 @media (width<=820px) {
   :root {
     --header: 68px;
@@ -1422,6 +1510,7 @@ h1 em {
   .navbar {
     min-height: var(--header);
   }
+  .nav-edition { display: none; }
   .brand-emblem {
     width: 38px;
     height: 38px;
@@ -1463,8 +1552,9 @@ h1 em {
   }
   .nav-panel {
     inset: var(--header) 0 0;
-    padding: 9vh var(--gutter) 40px;
-    background: var(--paper);
+    padding: clamp(35px, 8vh, 76px) var(--gutter) 35px;
+    background: var(--paper-light);
+    border-top: 1px solid var(--line);
     opacity: 0;
     visibility: hidden;
     flex-direction: column;
@@ -1476,7 +1566,8 @@ h1 em {
       visibility 0.25s;
     display: flex;
     position: fixed;
-    transform: translateY(-10px);
+    transform: translateY(-16px);
+    overflow-y: auto;
   }
   .nav-panel.open {
     opacity: 1;
@@ -1492,11 +1583,18 @@ h1 em {
     border-bottom: 1px solid var(--line);
     width: 100%;
   }
+  .nav-links li:first-child { border-top: 1px solid var(--line); }
   .nav-links a {
-    font: 400 clamp(27px, 7vw, 42px) var(--serif);
-    padding: 14px 0;
-    display: block;
+    font: 400 clamp(30px, 7vw, 43px)/1 var(--serif);
+    padding: 16px 0;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
   }
+  .nav-index { display: inline; color: var(--caramel); font: 600 9px var(--sans); letter-spacing: .08em; }
+  .nav-links a:after { bottom: 9px; left: 27px; right: auto; width: calc(100% - 27px); }
+  .nav-links li { opacity: 0; transform: translateY(8px); transition: opacity .3s, transform .3s; transition-delay: 0ms; }
+  .nav-panel.open .nav-links li { opacity: 1; transform: none; transition-delay: calc(80ms + var(--nav-index) * 45ms); }
   .nav-panel .nav-button {
     align-self: flex-start;
   }
@@ -1506,6 +1604,7 @@ h1 em {
     margin-top: auto;
     display: block;
   }
+  .nav-panel .nav-button { min-height: 52px; padding-inline: 21px; }
   .hero-composition {
     grid-template-columns: 0.88fr 1.12fr;
     min-height: 470px;
@@ -1693,7 +1792,7 @@ h1 em {
   }
   .hero-actions {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr);
     gap: 8px;
   }
   .hero-actions .button {
@@ -1976,12 +2075,13 @@ h1 em {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
-  .section-reveal {
-    opacity: 1;
-    transform: none;
-  }
+  .section-reveal :is(.menu-heading, .featured-topline, .gallery-heading, .location-intro, .section-heading,
+    .menu-feature-image, .favourite-photo, .about-visual, .coffee-portrait, .location-illustration,
+    .menu-feature-copy, .favourite-copy, .about-copy, .coffee-intro, .location-address, .contact-panel,
+    .feature-item, .gallery-item) { opacity: 1; transform: none; clip-path: none; transition: none; }
   .hero-photo img,
-  .hero-title-wrap h1 {
+  .hero-title-wrap h1,
+  .site-header {
     animation: none;
   }
 }
